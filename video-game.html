@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Video Game — Christopher Hailu</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <a class="brand" href="index.html">
+                <div class="logo">YN</div>
+                <div>
+                    <div style="font-weight:700">Christopher Hailu</div>
+                    <div style="font-size:12px;color:var(--muted)">Programmer • Data Analyst</div>
+                </div>
+            </a>
+
+            <nav aria-label="Main navigation">
+                <a class="btn" href="index.html">Home</a>
+                <a class="btn" href="ai-robot.html">AI Robot</a>
+                <a class="btn" href="video-game.html">Video Game</a>
+                <a class="btn" href="data-work.html">Data Work</a>
+                <a class="btn" href="about.html">About</a>
+                <a class="btn" href="contact.html">Contact</a>
+                <a class="cta" href="contact.html">Hire me</a>
+            </nav>
+        </header>
+
+        <main>
+            <h1 class="reveal" data-delay="0s">Video Game Projects</h1>
+            <div class="card reveal" data-delay="0.06s">
+                <div class="project-media">
+                    <img src="projects/game-screenshot.jpg" alt="Game screenshot">
+                </div>
+                <p style="color:var(--muted)">Overview of your game development work, engines used (e.g., Unity, Godot), and notable features.</p>
+                <h3 style="margin-top:12px">Highlights</h3>
+                <ul style="color:var(--muted)">
+                    <li>2D engine implementation</li>
+                    <li>Gameplay systems and AI</li>
+                    <li>Level design and assets</li>
+                </ul>
+            </div>
+        </main>
+
+        <footer style="margin-top:28px;color:var(--muted);font-size:13px">
+            <div>© <span id="year"></span> Christopher Hailu</div>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        (function setActiveNav(){try{const navLinks=document.querySelectorAll('nav a.btn,nav a.cta');const file=location.pathname.split('/').pop()||'index.html';navLinks.forEach(a=>{const href=(a.getAttribute('href')||'').split('/').pop();if(href===file|| (file===''&&(href==='index.html'))){a.classList.add('active')}})}catch(e){} })();
+        (function initReveal(){try{const items=document.querySelectorAll('.reveal');if(!items.length)return;const io=new IntersectionObserver((entries,obs)=>{entries.forEach(entry=>{if(entry.isIntersecting){const el=entry.target;const delay=el.dataset.delay||'0s';el.style.setProperty('--delay',delay);el.classList.add('active');obs.unobserve(el)}})},{threshold:0.12,rootMargin:'0px 0px -8% 0px'});items.forEach(i=>io.observe(i))}catch(e){}})();
+    </script>
+</body>
+</html>

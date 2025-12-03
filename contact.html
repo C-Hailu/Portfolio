@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Contact — Your Name</title>
+    <meta name="description" content="Contact page." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <a class="brand" href="index.html">
+                <div class="logo">YN</div>
+                <div>
+                    <div style="font-weight:700">Your Name</div>
+                    <div style="font-size:12px;color:var(--muted)">Frontend Engineer • Designer</div>
+                </div>
+            </a>
+
+            <nav aria-label="Main navigation">
+                <a class="btn" href="index.html">Home</a>
+                <a class="btn" href="ai-robot.html">AI Robot</a>
+                <a class="btn" href="video-game.html">Video Game</a>
+                <a class="btn" href="data-work.html">Data Work</a>
+                <a class="btn" href="about.html">About</a>
+                <a class="btn" href="contact.html">Contact</a>
+                <a class="cta" href="contact.html">Hire me</a>
+            </nav>
+        </header>
+
+        <main>
+            <section>
+                <h1 class="reveal" data-delay="0s" style="margin:0 0 12px 0">Contact</h1>
+
+                <div class="card reveal" data-delay="0.06s">
+                    <div style="display:flex;flex-direction:column;gap:10px">
+                        <div>
+                            <strong>Resume</strong>
+                            <div style="margin-top:8px">
+                                <!-- Place your PDF at `resume.pdf` in the project root to enable download/preview -->
+                                <a class="btn" href="resume.pdf" download style="margin-right:8px">Download resume (PDF)</a>
+                                <a class="btn" href="resume.pdf" target="_blank">Open resume</a>
+                            </div>
+                        </div>
+
+                        <div style="color:var(--muted);font-size:13px">Preview (if supported):</div>
+                        <div style="min-height:220px;border-radius:10px;overflow:hidden;background:#061018;padding:8px">
+                            <iframe src="resume.pdf" style="width:100%;height:100%;min-height:200px;border:0" title="Resume preview"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card reveal" data-delay="0.12s" style="margin-top:12px">
+                    <form id="contactForm" onsubmit="return handleSubmit(event)">
+                        <div style="display:flex;gap:12px;flex-wrap:wrap">
+                            <input name="name" placeholder="Your name" required style="flex:1 1 200px">
+                            <input name="email" type="email" placeholder="Email" required style="flex:1 1 200px">
+                        </div>
+                        <div style="margin-top:10px">
+                            <textarea name="message" rows="5" placeholder="Message" required style="width:100%"></textarea>
+                        </div>
+                        <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
+                            <button class="primary" type="submit">Send message</button>
+                            <div style="color:var(--muted);font-size:13px">Or email: <a href="mailto:you@example.com" style="color:inherit">you@example.com</a></div>
+                        </div>
+                        <div id="formMsg" style="margin-top:8px;color:#aee6b1;display:none"></div>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer style="margin-top:28px;color:var(--muted);font-size:13px">
+            <div>© <span id="year"></span> Your Name</div>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        function handleSubmit(e){
+            e.preventDefault();
+            const form = e.target; const msg = document.getElementById('formMsg');
+            msg.style.display = 'block'; msg.textContent = 'Thanks — your message was sent (demo).';
+            form.reset(); setTimeout(()=> msg.style.display='none', 4000); return false;
+        }
+        (function setActiveNav(){
+            try{
+                const navLinks = document.querySelectorAll('nav a.btn, nav a.cta');
+                const file = location.pathname.split('/').pop() || 'index.html';
+                navLinks.forEach(a=>{
+                    const href = (a.getAttribute('href')||'').split('/').pop();
+                    if(href === file || (file === '' && (href === 'index.html'))){ a.classList.add('active'); }
+                });
+            }catch(e){}
+        })();
+
+        // Scroll reveal using IntersectionObserver
+        (function initReveal(){
+            try{
+                const items = document.querySelectorAll('.reveal');
+                if(!items.length) return;
+                const io = new IntersectionObserver((entries, obs)=>{
+                    entries.forEach(entry=>{
+                        if(entry.isIntersecting){
+                            const el = entry.target;
+                            const delay = el.dataset.delay || '0s';
+                            el.style.setProperty('--delay', delay);
+                            el.classList.add('active');
+                            obs.unobserve(el);
+                        }
+                    });
+                },{threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+                items.forEach(i=> io.observe(i));
+            }catch(e){}
+        })();
+    </script>
+</body>
+</html>
