@@ -27,7 +27,19 @@
                 <a class="btn" href="contact.html">Contact</a>
                 <a class="cta" href="contact.html">Hire me</a>
             </nav>
+            <button class="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </header>
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+            <a href="index.html">Home</a>
+            <a href="data-work.html">Data Work</a>
+            <a href="ai-robot.html">AI Robot</a>
+            <a href="video-game.html">Game Dev</a>
+            <a href="contact.html">Contact</a>
+        </nav>
 
         <main>
             <section>
@@ -83,9 +95,10 @@
             msg.style.display = 'block'; msg.textContent = 'Thanks — your message was sent (demo).';
             form.reset(); setTimeout(()=> msg.style.display='none', 4000); return false;
         }
+        (function initHamburgerMenu(){const hamburger=document.querySelector('.hamburger');const mobileNav=document.querySelector('.mobile-nav');const mobileNavLinks=document.querySelectorAll('.mobile-nav a');hamburger.addEventListener('click',()=>{hamburger.classList.toggle('active');mobileNav.classList.toggle('active')});mobileNavLinks.forEach(link=>{link.addEventListener('click',()=>{hamburger.classList.remove('active');mobileNav.classList.remove('active')})})})();
         (function setActiveNav(){
             try{
-                const navLinks = document.querySelectorAll('nav a.btn, nav a.cta');
+                const navLinks = document.querySelectorAll('nav a.btn, nav a.cta, .mobile-nav a');
                 const file = location.pathname.split('/').pop() || 'index.html';
                 navLinks.forEach(a=>{
                     const href = (a.getAttribute('href')||'').split('/').pop();
