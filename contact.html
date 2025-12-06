@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="card reveal" data-delay="0.12s" style="margin-top:12px">
-                    <form id="contactForm" onsubmit="return handleSubmit(event)">
+                    <form id="contactForm" action="https://formspree.io/f/xvgpzkdj" method="POST">
                         <div style="display:flex;gap:12px;flex-wrap:wrap">
                             <input name="name" placeholder="Your name" required style="flex:1 1 200px">
                             <input name="email" type="email" placeholder="Email" required style="flex:1 1 200px">
@@ -77,12 +77,18 @@
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
-        function handleSubmit(e){
-            e.preventDefault();
-            const form = e.target; const msg = document.getElementById('formMsg');
-            msg.style.display = 'block'; msg.textContent = 'Thanks — your message was sent (demo).';
-            form.reset(); setTimeout(()=> msg.style.display='none', 4000); return false;
+        
+        // Handle form submission with Formspree
+        const contactForm = document.getElementById('contactForm');
+        if(contactForm){
+            contactForm.addEventListener('submit', function(e){
+                const btn = this.querySelector('button[type="submit"]');
+                const originalText = btn.textContent;
+                btn.textContent = 'Sending...';
+                btn.disabled = true;
+            });
         }
+        
         (function setActiveNav(){
             try{
                 const navLinks = document.querySelectorAll('nav a.btn, nav a.cta');
