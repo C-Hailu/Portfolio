@@ -97,8 +97,11 @@
                         <div style="margin-top:10px">
                             <textarea name="message" rows="5" placeholder="Message" required style="width:100%"></textarea>
                         </div>
-                        <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
-                            <button class="primary" type="submit">Send message</button>
+                        <div style="display:flex;gap:8px;margin-top:10px;align-items:center;flex-wrap:wrap">
+                            <div style="display:flex;gap:8px">
+                                <button class="primary" type="submit">Send message</button>
+                                <button class="clear-btn" type="button">Clear</button>
+                            </div>
                             <div style="color:var(--muted);font-size:13px">Or email: <a href="mailto:chrishailu0@gmail.com" style="color:inherit">chrishailu0@gmail.com</a></div>
                         </div>
                     </form>
@@ -118,6 +121,18 @@
     <script>
         // Small interactive helpers
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Handle contact form clear button
+        const contactForm = document.getElementById('contactForm');
+        if(contactForm){
+            const clearBtn = contactForm.querySelector('button.clear-btn');
+            if(clearBtn){
+                clearBtn.addEventListener('click', function(e){
+                    e.preventDefault();
+                    contactForm.reset();
+                });
+            }
+        }
 
         // Highlight the active nav item based on the current filename
         (function setActiveNav(){
