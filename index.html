@@ -89,7 +89,7 @@
             <section id="contact">
                 <h2 style="margin:0 0 12px 0">Contact</h2>
                 <div class="card reveal" data-delay="0s">
-                    <form id="contactForm" onsubmit="return handleSubmit(event)" aria-label="Contact form">
+                    <form id="contactForm" action="https://formspree.io/f/xzznvoap" method="POST" aria-label="Contact form">
                         <div style="display:flex;gap:12px;flex-wrap:wrap">
                             <input name="name" placeholder="Your name" required style="flex:1 1 200px">
                             <input name="email" type="email" placeholder="Email" required style="flex:1 1 200px">
@@ -101,7 +101,6 @@
                             <button class="primary" type="submit">Send message</button>
                             <div style="color:var(--muted);font-size:13px">Or email: <a href="mailto:chrishailu0@gmail.com" style="color:inherit">chrishailu0@gmail.com</a></div>
                         </div>
-                        <div id="formMsg" style="margin-top:8px;color:#aee6b1;display:none"></div>
                     </form>
                 </div>
             </section>
@@ -119,18 +118,6 @@
     <script>
         // Small interactive helpers
         document.getElementById('year').textContent = new Date().getFullYear();
-
-        function handleSubmit(e){
-            e.preventDefault();
-            const form = e.target;
-            const msg = document.getElementById('formMsg');
-            // Basic client-side feedback only. Replace with your API endpoint.
-            msg.style.display = 'block';
-            msg.textContent = 'Thanks — your message was sent (demo).';
-            form.reset();
-            setTimeout(()=> msg.style.display='none', 4000);
-            return false;
-        }
 
         // Highlight the active nav item based on the current filename
         (function setActiveNav(){
